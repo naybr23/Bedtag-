@@ -344,7 +344,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../subject/list.subject.senior.php" class="nav-link">
+                <a href="../strands/list.strand.php" class="nav-link">
                   <i class="fas fa-folder-plus nav-icon"></i>
                   <p> Strand
                   <i class="right fas fa-angle-left"></i>

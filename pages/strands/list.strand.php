@@ -29,7 +29,7 @@ if (isset($_POST['eay'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SHS Subject List | BED Taguig</title>
+  <title>SHS Strand List | BED Taguig</title>
 
   <?php include '../../includes/links.php'; ?>
 
@@ -140,46 +140,34 @@ if (isset($_POST['eay'])) {
             <table id="example2" class="table table-bordered table-hover">
               <thead>
                 <tr>
-                    <th>Code</th>
+                    <th>strand</th>
                     <th>Description</th>
-                    <th>Units</th>
-                    <th>Pre-Requisites</th>
-                    <th>Grade Level</th>
-                    <th>Semester</th>
                     <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                    $get_subjects = mysqli_query($conn, "SELECT * FROM tbl_subjects_senior
-                    LEFT JOIN tbl_grade_levels ON tbl_grade_levels.grade_level_id = tbl_subjects_senior.grade_level_id
-                    LEFT JOIN tbl_semesters ON tbl_semesters.semester_id = tbl_subjects_senior.semester_id
-                    LEFT JOIN tbl_strands ON tbl_strands.strand_id = tbl_subjects_senior.strand_id
-                    LEFT JOIN tbl_efacadyears ON tbl_efacadyears.efacadyear_id = tbl_subjects_senior.efacadyear_id
-                    WHERE tbl_grade_levels.grade_level IN ('$grade_level') AND tbl_strands.strand_name IN ('$strand_name') AND tbl_efacadyears.efacadyear_id IN ('$eay') ORDER BY tbl_subjects_senior.semester_id ASC, subject_id") or die(mysqli_error($conn));
-                    while ($row = mysqli_fetch_array($get_subjects)) {
+                    $get_strands = mysqli_query($conn, "SELECT * FROM tbl_strands ORDER BY  strand_id") or die(mysqli_error($conn));
+                    while ($row = mysqli_fetch_array($get_strands)) {
                 ?>
                 <tr>
-                    <td><?php echo $row['subject_code']; ?></td>
-                    <td><?php echo $row['subject_description']; ?></td>
-                    <td><?php echo $row['total_units']; ?></td>
-                    <td><?php echo $row['pre_requisites']; ?></td>
-                    <td><?php echo $row['grade_level']; ?></td>
-                    <td><?php echo $row['semester']; ?></td>
+                    <td><?php echo $row['strand_name']; ?></td>
+                    <td><?php echo $row['strand_def']; ?></td>
+                   
                   <td>
-                    <a type="button" href="edit.subject.senior.php?subject_id=<?php echo $row['subject_id']; ?>" class="btn btn-primary btn-sm m-1">
+                    <a type="button" href="edit.strand.php?strand_id=<?php echo $row['strand_id']; ?>" class="btn btn-primary btn-sm m-1">
                       Edit
                     </a>
-                    <button class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#modal-md<?php echo $row['subject_id']; ?>">Delete</button>
+                    <button class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#modal-md<?php echo $row['strand_id']; ?>">Delete</button>
                     
                   </td>
                 </tr>
                 <!-- Modal for grade input -->
-                <div class="modal fade" id="modal-md<?php echo $row['subject_id']; ?>">
+                <div class="modal fade" id="modal-md<?php echo $row['strand_id']; ?>">
                     <div class="modal-dialog modal-md">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h4 class="modal-title text-danger"><b>Delete Subject</b></h4>
+                          <h4 class="modal-title text-danger"><b>Delete strand</b></h4>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>

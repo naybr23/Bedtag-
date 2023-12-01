@@ -19,5 +19,6 @@ if (isset($_POST['submit'])) {
     } else {
         $_SESSION['strand_exists'] = true;
         header('location: ../add.strand.php');
+
     }
 }
